@@ -2,9 +2,8 @@
 
 import { app, protocol, BrowserWindow } from "electron";
 import {
-  createProtocol
-  //The Vue devtools is not running on Electron due to Dark Mode Windows
-  //installVueDevtools
+  createProtocol,
+  installVueDevtools
 } from "vue-cli-plugin-electron-builder/lib";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -19,14 +18,8 @@ protocol.registerSchemesAsPrivileged([
 
 function createWindow() {
   // Create the browser window.
-  // You can also set an specific window size by setting the width and height
-  // as properties of the object when creating BrowserWindow.
-  // Example { width: 800, height: 600}
-
   win = new BrowserWindow({
     show: false,
-    // width: 800,
-    // height: 600,
     webPreferences: {
       nodeIntegration: true
     }

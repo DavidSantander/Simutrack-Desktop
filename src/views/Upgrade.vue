@@ -11,8 +11,12 @@
             <thead>
               <tr>
                 <th />
-                <th class="subheading font-weight-light">Free</th>
-                <th class="subheading font-weight-light">PRO</th>
+                <th class="subheading font-weight-light">
+                  Free
+                </th>
+                <th class="subheading font-weight-light">
+                  PRO
+                </th>
               </tr>
             </thead>
             <tbody class="text-xs-center">

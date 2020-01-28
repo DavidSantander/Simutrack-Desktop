@@ -1,5 +1,9 @@
 module.exports = {
   devServer: {
-    disableHostCheck: true
+    disableHostCheck: true,
+    overlay: {
+      warnings: false,
+      errors: false
+    }
   }
 };

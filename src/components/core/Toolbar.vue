@@ -24,7 +24,7 @@
           to="/signup"
           color="purple"
         >
-          Sign Up
+          Registrate
         </router-link>
         <router-link
           v-ripple="{ class: 'info--text' }"
@@ -32,7 +32,7 @@
           to="/signin"
           color="purple"
         >
-          Sign in
+          Acceder
         </router-link>
         <v-menu
           bottom

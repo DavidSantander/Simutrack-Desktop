@@ -5,6 +5,16 @@
  */
 export default [
   {
+    path: "/signin",
+    name: "Sign In",
+    view: "Signin"
+  },
+  {
+    path: "/signup",
+    name: "Sign Up",
+    view: "Signup"
+  },
+  {
     path: "",
     // Relative to /src/views
     view: "Dashboard"
@@ -34,10 +44,5 @@ export default [
   {
     path: "/notifications",
     view: "Notifications"
-  },
-  {
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    view: "Upgrade"
   }
 ];

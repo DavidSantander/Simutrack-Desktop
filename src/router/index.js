@@ -42,6 +42,20 @@ const router = new Router({
   }
 });
 
+console.log(router);
+
+// // Authentication
+// router.beforeEach((to, from, next) => {
+//   var i;
+//   if (true) {
+//     i++;
+//     console.log("Logged In " + i);
+//     next("/login");
+//   } else {
+//     next();
+//   }
+// });
+
 Vue.use(Meta);
 
 // Bootstrap Analytics

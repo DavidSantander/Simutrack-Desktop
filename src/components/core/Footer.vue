@@ -1,39 +1,47 @@
 <template>
-  <v-footer id="core-footer" absolute height="82">
-    <div class="footer-items">
-      <span v-for="link in links" :key="link.name">
-        <a :href="link.Link" class="tertiary--text footer-links">{{
-          link.name
-        }}</a>
-      </span>
-    </div>
-    <v-spacer />
-    <span class="font-weight-light copyright">
-      &copy;
-      {{ new Date().getFullYear() }}
-      <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a>,
-      made with
-      <v-icon color="tertiary" size="17">mdi-heart</v-icon>
-      for a better web
-    </span>
-  </v-footer>
+    <v-footer id="core-footer" absolute height="82">
+        <div class="footer-items">
+            <span v-for="link in links" :key="link.name">
+                <a :href="link.Link" class="tertiary--text footer-links">{{
+                    link.name
+                }}</a>
+            </span>
+        </div>
+        <v-spacer />
+        <span class="font-weight-light copyright">
+            &copy;
+            {{ new Date().getFullYear() }}
+            <a href="linkedin.com/in/david-santander" target="_blank"
+                >David Santander</a
+            >
+        </span>
+    </v-footer>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    links: [
-      { name: "Home", Link: "/#" },
-      { name: "Creative Tim", Link: "https://www.creative-tim.com" },
-      { name: "About Us", Link: "https://creative-tim.com/presentation" },
-      { name: "Blog", Link: "https://blog.creative-tim.com" }
-    ]
-  })
+    data: () => ({
+        links: [
+            { name: "Home", Link: "/#" },
+            {
+                name: "Simutrack GitHub",
+                Link: "https://github.com/DavidSantander/Simutrack-Desktop"
+            },
+            {
+                name: "Facebook",
+                Link: "https://www.facebook.com/santander.david.19"
+            },
+            {
+                name: "LinkedIn",
+                Link: "linkedin.com/in/david-santander"
+            }
+        ]
+    })
 };
 </script>
 
 <style>
 #core-footer {
-  z-index: 0;
+    z-index: 0;
 }
 </style>

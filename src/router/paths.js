@@ -6,12 +6,12 @@
 export default [
   {
     path: "/signin",
-    name: "Sign In",
+    name: "Acceder",
     view: "Signin"
   },
   {
     path: "/signup",
-    name: "Sign Up",
+    name: "Registrarse",
     view: "Signup"
   },
   {

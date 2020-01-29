@@ -18,11 +18,12 @@
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
+                    color="blue"
                     :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="[rules.required, rules.min]"
                     :type="show ? 'text' : 'password'"
                     name="input-10-2"
-                    hint="At least 8 characters"
+                    hint="Almenos 8 caracteres"
                     value="wqfasds"
                     @click:append="show = !show"
                     label="Contraseña"
@@ -70,7 +71,7 @@ export default {
   data() {
     return {
       show: false,
-      password: "Password",
+      password: "",
       rules: {
         required: value => !!value || "Requerido.",
         min: v => v.length >= 8 || "Mínimo 8 caracteres",

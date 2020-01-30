@@ -45,6 +45,17 @@
                 <v-flex xs12 md4>
                   <v-text-field label="Materia" class="info-input" />
                 </v-flex>
+                <v-flex xs12 md6>
+                  <v-text-field label="Grupo" class="info-input" />
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-select
+                    color="blue"
+                    :items="typeOfUsers"
+                    label="Tipo de Usuario"
+                  ></v-select>
+                </v-flex>
+
                 <v-flex xs12>
                   <v-textarea
                     class="info-input"
@@ -67,11 +78,21 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      show: false,
+      // Data to be stored
       password: "",
+      user: "",
+      email: "",
+      name: "",
+      lastName: "",
+      school: "",
+      career: "",
+      subject: "",
+      typeOfUsers: ["Profesor", "Alumno"],
+      show: false,
       rules: {
         required: value => !!value || "Requerido.",
         min: v => v.length >= 8 || "Mínimo 8 caracteres",

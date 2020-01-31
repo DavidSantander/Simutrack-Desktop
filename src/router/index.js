@@ -42,8 +42,6 @@ const router = new Router({
   }
 });
 
-console.log(router);
-
 // // Authentication
 // router.beforeEach((to, from, next) => {
 //   var i;

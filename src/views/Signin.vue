@@ -7,7 +7,7 @@
           title="Accede a Simutrack"
           text="Completa tu perfil"
         >
-          <v-form>
+          <v-form ref="form" v-model="valid">
             <v-container py-0>
               <v-layout wrap>
                 <v-flex xs12 md12>
@@ -43,17 +43,17 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      show: false,
-      password: "",
-      rules: {
-        required: value => !!value || "Requerido.",
-        min: v => v.length >= 8 || "Mínimo 8 caracteres",
-        emailMatch: () => "El correo y contraseña no coinciden"
-      }
-    };
-  }
-};
+  export default {
+    data() {
+      return {
+        show: false,
+        password: "",
+        rules: {
+          required: value => !!value || "Requerido.",
+          min: v => v.length >= 8 || "Mínimo 8 caracteres",
+          emailMatch: () => "El correo y contraseña no coinciden"
+        }
+      };
+    }
+  };
 </script>

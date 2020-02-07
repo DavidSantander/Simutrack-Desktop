@@ -234,6 +234,7 @@
                     :disabled="!valid"
                     class="mx-0 font-weight-light"
                     color="info"
+                    @click="onSubmit()"
                   >
                     Registrate!
                   </v-btn>
@@ -248,38 +249,55 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      valid: true,
-      user: "",
-      userRules: [
-        v => !!v || "Usuario es requerido",
-        v =>
-          (v && v.length <= 10) || "Usuario debe  de ser menor a 10 caracteres"
-      ],
-      email: "",
-      emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
-      password: "",
-      show: false,
-      passwordRules: {
-        required: value => !!value || "Required.",
-        min: v => v.length >= 8 || "Min 8 characters"
-      },
-      name: "",
-      lastName: "",
-      school: "",
-      career: "",
-      subject: "",
-      group: "",
-      // User types
-      select: null,
-      userTypes: ["Profesor", "Alumno"],
-      lazy: false
-    }),
-
-    methods: {}
-  };
+import axios from "axios";
+export default {
+  data: () => ({
+    valid: true,
+    user: "",
+    userRules: [
+      v => !!v || "Usuario es requerido",
+      v => (v && v.length <= 10) || "Usuario debe  de ser menor a 10 caracteres"
+    ],
+    email: "",
+    emailRules: [
+      v => !!v || "E-mail is required",
+      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+    ],
+    password: "",
+    show: false,
+    passwordRules: {
+      required: value => !!value || "Required.",
+      min: v => v.length >= 8 || "Min 8 characters"
+    },
+    name: "",
+    lastName: "",
+    school: "",
+    career: "",
+    subject: "",
+    group: "",
+    // User types
+    select: null,
+    userTypes: ["Profesor", "Alumno"],
+    lazy: false
+  }),
+  methods: {
+    onSubmit() {
+      const formData = {
+        user: this.user,
+        email: this.email,
+        password: this.password,
+        name: this.name,
+        lastName: this.lastName,
+        school: this.school,
+        career: this.career,
+        subject: this.subject,
+        userType: this.select
+      };
+      axios
+        .post("https://simutrack-test.firebaseio.com/users.json", formData)
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
+    }
+  }
+};
 </script>

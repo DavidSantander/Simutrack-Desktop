@@ -16,6 +16,7 @@ export default {
           userId: res.data.localId
         });
         dispatch("storeUser", authData);
+        commit("showDrawer");
       })
       .catch(error => console.log(error));
   },
@@ -35,6 +36,7 @@ export default {
           token: res.data.idToken,
           userId: res.data.localId
         });
+        commit("showDrawer");
       })
       .catch(error => console.log("TCL: signin -> error", error));
   },

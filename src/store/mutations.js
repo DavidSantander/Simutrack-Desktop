@@ -5,5 +5,8 @@ export default {
   },
   storeUser(state, user) {
     state.user = user;
+  },
+  showDrawer(state) {
+    state.drawerVisible = true;
   }
 };

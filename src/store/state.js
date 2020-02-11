@@ -1,5 +1,6 @@
 export default {
   idToken: null,
   userId: null,
-  user: null
+  user: null,
+  drawerVisible: false
 };

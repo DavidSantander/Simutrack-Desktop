@@ -11,6 +11,7 @@ import Vue from "vue";
 import VueAnalytics from "vue-analytics";
 import Router from "vue-router";
 import Meta from "vue-meta";
+import store from "../store/index";
 
 // Routes
 import paths from "./paths";
@@ -42,17 +43,14 @@ const router = new Router({
   }
 });
 
-// // Authentication
-// router.beforeEach((to, from, next) => {
-//   var i;
-//   if (true) {
-//     i++;
-//     console.log("Logged In " + i);
-//     next("/login");
-//   } else {
-//     next();
-//   }
-// });
+// Authentication to.path !== ‘/login’
+router.beforeEach((to, from, next) => {
+  if (!store.state.idToken && to.path !== "/signin") {
+    next("/signin");
+  } else {
+    next();
+  }
+});
 
 Vue.use(Meta);
 

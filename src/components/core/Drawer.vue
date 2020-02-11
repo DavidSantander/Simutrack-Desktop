@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="drawerVisible"
     id="app-drawer"
     v-model="inputValue"
     app
@@ -56,6 +57,7 @@ export default {
     }
   },
   data: () => ({
+    drawerStatus: false,
     logo: "favicon.ico",
     links: [
       {
@@ -95,6 +97,7 @@ export default {
       }
     ]
   }),
+
   computed: {
     ...mapState("app", ["image", "color"]),
     inputValue: {
@@ -107,11 +110,17 @@ export default {
     },
     items() {
       return this.$t("Layout.View.items");
+    },
+    drawerVisible() {
+      this.drawerStatus = this.$store.state.drawerVisible;
+      return this.drawerStatus;
     }
   },
-
   methods: {
     ...mapMutations("app", ["setDrawer", "toggleDrawer"])
+  },
+  beforeMount() {
+    this.drawerStatus = this.$store.state.drawerVisible;
   }
 };
 </script>

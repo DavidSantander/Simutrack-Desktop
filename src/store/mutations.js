@@ -1,5 +1,9 @@
-// https://vuex.vuejs.org/en/mutations.html
-
 export default {
-  //
+  authUser(state, userData) {
+    state.idToken = userData.token;
+    state.userId = userData.userId;
+  },
+  storeUser(state, user) {
+    state.user = user;
+  }
 };

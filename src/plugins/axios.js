@@ -4,3 +4,4 @@ import Vue from "vue";
 import axios from "axios";
 
 Vue.prototype.$http = axios;
+axios.defaults.baseURL = "https://simutrack-test.firebaseio.com/";

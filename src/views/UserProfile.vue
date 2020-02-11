@@ -67,7 +67,7 @@
           </v-avatar>
           <v-card-text class="text-xs-center">
             <h6 class="category text-gray font-weight-thin mb-3">
-              CEO / CO-FOUNDER
+              {{ email }}
             </h6>
             <h4 class="card-title font-weight-light">Alec Thompson</h4>
             <p class="card-description font-weight-light">
@@ -86,7 +86,15 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  //
+  computed: {
+    email() {
+      return !this.$store.getters.user ? false : this.$store.getters.user.email;
+    },
+    created() {
+      this.$store.dispatch("fetchUser");
+    }
+  }
 };
 </script>

@@ -7,121 +7,6 @@
           title="Registrate en Simutrack"
           text="Completa tu perfil"
         >
-          <!-- <v-form ref="form" v-model="valid">
-            <v-container py-0>
-              <v-layout wrap>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="user"
-                    label="Usuario"
-                    class="info-input"
-                    value=""
-                  />
-                </v-flex>
-
-                 <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="email"
-                    label="Correo Electrónico"
-                    class="info-input"
-                    required
-                  />
-
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="password"
-                    color="blue"
-                    :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="[rules.required, rules.min]"
-                    :type="show ? 'text' : 'password'"
-                    name="input-10-2"
-                    hint="Almenos 8 caracteres"
-                    value="wqfasds"
-                    @click:append="show = !show"
-                    label="Contraseña"
-                    class="info-input"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md6>
-                  <v-text-field
-                    v-model="name"
-                    label="Nombre"
-                    class="info-input"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md6>
-                  <v-text-field
-                    v-model="lastName"
-                    label="Apellido"
-                    class="info-input"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="school"
-                    label="Escuela"
-                    class="info-input"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="career"
-                    label="Carrera"
-                    class="info-input"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="subject"
-                    label="Materia"
-                    class="info-input"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md6>
-                  <v-text-field
-                    v-model="group"
-                    label="Grupo"
-                    class="info-input"
-                    required
-                  />
-                </v-flex>
-                <v-flex xs12 md6>
-                  <v-select
-                    color="blue"
-                    :items="typeOfUsers"
-                    label="Tipo de Usuario"
-                    required
-                  ></v-select>
-                </v-flex>
-                <v-flex xs12>
-                  <v-textarea
-                    class="info-input"
-                    label="Acerca de mi"
-                    value="¿Quien soy?"
-                    v-model="aboutMe"
-                  />
-                </v-flex> 
-                <v-flex xs12 text-xs-right>
-                  <v-btn
-                    :disabled="!valid"
-                    @click="validate"
-                    class="mx-0 font-weight-light"
-                    color="info"
-                  >
-                    Registrarse
-                  </v-btn>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-form> -->
-
           <v-form ref="form" v-model="valid" :lazy-validation="lazy">
             <v-container py-0>
               <v-layout wrap>
@@ -249,7 +134,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapMutations, mapState, mapActions } from "vuex";
 export default {
   data: () => ({
     valid: true,
@@ -281,6 +166,7 @@ export default {
     lazy: false
   }),
   methods: {
+    ...mapActions("app", ["signup", "signin"]),
     onSubmit() {
       const formData = {
         user: this.user,
@@ -293,10 +179,7 @@ export default {
         subject: this.subject,
         userType: this.select
       };
-      axios
-        .post("https://simutrack-test.firebaseio.com/users.json", formData)
-        .then(res => console.log(res))
-        .catch(error => console.log(error));
+      this.$store.dispatch("signup", formData);
     }
   }
 };

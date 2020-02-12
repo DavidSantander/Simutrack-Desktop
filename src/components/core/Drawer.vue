@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-if="drawerVisible"
+    v-if="auth"
     id="app-drawer"
     v-model="inputValue"
     app
@@ -48,7 +48,6 @@
 <script>
 // Utilities
 import { mapMutations, mapState } from "vuex";
-
 export default {
   props: {
     opened: {
@@ -57,7 +56,6 @@ export default {
     }
   },
   data: () => ({
-    drawerStatus: false,
     logo: "favicon.ico",
     links: [
       {
@@ -111,16 +109,15 @@ export default {
     items() {
       return this.$t("Layout.View.items");
     },
-    drawerVisible() {
-      this.drawerStatus = this.$store.state.drawerVisible;
-      return this.drawerStatus;
+    auth() {
+      return this.$store.state.idToken;
     }
   },
   methods: {
     ...mapMutations("app", ["setDrawer", "toggleDrawer"])
   },
   beforeMount() {
-    this.drawerStatus = this.$store.state.drawerVisible;
+    return this.auth;
   }
 };
 </script>

@@ -8,5 +8,10 @@ export default {
   },
   showDrawer(state) {
     state.drawerVisible = true;
+  },
+  clearAuthData(state) {
+    state.idToken = null;
+    state.userId = null;
+    drawerVisible: false;
   }
 };

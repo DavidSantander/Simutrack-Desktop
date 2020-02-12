@@ -68,5 +68,9 @@ export default {
         commit("storeUser", users[0]);
       })
       .catch(error => console.log(error));
+  },
+  logout({ commit, state }) {
+    console.log("In logout action");
+    commit("clearAuthData");
   }
 };

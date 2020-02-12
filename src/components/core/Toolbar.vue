@@ -14,11 +14,12 @@
         {{ title }}
       </v-toolbar-title>
     </div>
-
     <v-spacer />
     <v-toolbar-items>
       <v-flex align-center layout py-2>
+        <!-- Link to signup View -->
         <router-link
+          v-if="!auth"
           v-ripple="{ class: 'info--text' }"
           class="toolbar-items"
           to="/signup"
@@ -26,13 +27,27 @@
         >
           Registrate
         </router-link>
+        <!-- Link to signin View -->
         <router-link
+          v-if="!auth"
           v-ripple="{ class: 'info--text' }"
           class="toolbar-items"
           to="/signin"
           color="purple"
         >
           Acceder
+        </router-link>
+        <!-- Link to signout  -->
+        <router-link
+          v-if="auth"
+          @click="onLogout"
+          v-ripple="{ class: 'info--text' }"
+          class="toolbar-items"
+          to="/signin"
+          color="purple"
+          @click.native="onLogout()"
+        >
+          Salir
         </router-link>
         <v-menu
           bottom
@@ -79,8 +94,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-
+import { mapMutations, mapState, mapActions } from "vuex";
 export default {
   data: () => ({
     notifications: [
@@ -93,13 +107,16 @@ export default {
     title: null,
     responsive: false
   }),
-
+  computed: {
+    auth() {
+      return this.$store.getters.isAuthenticated;
+    }
+  },
   watch: {
     $route(val) {
       this.title = val.name;
     }
   },
-
   mounted() {
     this.onResponsiveInverted();
     window.addEventListener("resize", this.onResponsiveInverted);
@@ -107,8 +124,8 @@ export default {
   beforeDestroy() {
     window.removeEventListener("resize", this.onResponsiveInverted);
   },
-
   methods: {
+    ...mapActions(["logout"]),
     ...mapMutations("app", ["setDrawer", "toggleDrawer"]),
     onClickBtn() {
       this.setDrawer(!this.$store.state.app.drawer);
@@ -122,6 +139,10 @@ export default {
       } else {
         this.responsive = false;
       }
+    },
+    onLogout() {
+      console.log("Clicked Salir");
+      this.$store.dispatch("logout");
     }
   }
 };

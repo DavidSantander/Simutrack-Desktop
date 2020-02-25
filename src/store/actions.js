@@ -16,7 +16,6 @@ export default {
         returnSecureToken: true
       })
       .then(res => {
-        console.log("TCL: signup -> res", res);
         commit("authUser", {
           token: res.data.idToken,
           userId: res.data.localId
@@ -44,7 +43,6 @@ export default {
         }
       )
       .then(res => {
-        console.log("TCL: signin -> res", res);
         const now = new Date();
         const expirationDate = new Date(
           now.getTime() + res.data.expiresIn * 1000
@@ -80,7 +78,6 @@ export default {
     signinRouter.push("/");
   },
   storeUser({ commit, state }, userData) {
-    console.log("TCL: storeUser -> userData", userData);
     if (!state.idToken) {
       return;
     }
@@ -96,7 +93,6 @@ export default {
     globalAxios
       .get("/users.json" + "?auth=" + state.idToken)
       .then(res => {
-        console.log(res);
         const data = res.data;
         const users = [];
         for (let key in data) {

@@ -46,91 +46,91 @@
 </template>
 
 <script>
-// Utilities
-import { mapMutations, mapState } from "vuex";
-export default {
-  props: {
-    opened: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data: () => ({
-    logo: "favicon.ico",
-    links: [
-      {
-        to: "/",
-        icon: "mdi-view-dashboard",
-        text: "Dashboard"
-      },
-      {
-        to: "/user-profile",
-        icon: "mdi-account",
-        text: "Perfil"
-      },
-      {
-        to: "/table-list",
-        icon: "mdi-clipboard-outline",
-        text: "Table List"
-      },
-      {
-        to: "/typography",
-        icon: "mdi-format-font",
-        text: "Typography"
-      },
-      {
-        to: "/icons",
-        icon: "mdi-chart-bubble",
-        text: "Icons"
-      },
-      {
-        to: "/maps",
-        icon: "mdi-map-marker",
-        text: "Maps"
-      },
-      {
-        to: "/notifications",
-        icon: "mdi-bell",
-        text: "Notifications"
+  // Utilities
+  import { mapMutations, mapState } from "vuex";
+  export default {
+    props: {
+      opened: {
+        type: Boolean,
+        default: false
       }
-    ]
-  }),
+    },
+    data: () => ({
+      logo: "favicon.ico",
+      links: [
+        {
+          to: "/",
+          icon: "mdi-view-dashboard",
+          text: "Dashboard"
+        },
+        {
+          to: "/typography",
+          icon: "mdi-format-font",
+          text: "Typography"
+        },
+        {
+          to: "/table-list",
+          icon: "mdi-clipboard-outline",
+          text: "Table List"
+        },
+        {
+          to: "/icons",
+          icon: "mdi-chart-bubble",
+          text: "Icons"
+        },
+        {
+          to: "/maps",
+          icon: "mdi-map-marker",
+          text: "Maps"
+        },
+        {
+          to: "/notifications",
+          icon: "mdi-bell",
+          text: "Notifications"
+        },
+        {
+          to: "/user-profile",
+          icon: "mdi-account",
+          text: "Perfil"
+        }
+      ]
+    }),
 
-  computed: {
-    ...mapState("app", ["image", "color"]),
-    inputValue: {
-      get() {
-        return this.$store.state.app.drawer;
+    computed: {
+      ...mapState("app", ["image", "color"]),
+      inputValue: {
+        get() {
+          return this.$store.state.app.drawer;
+        },
+        set(val) {
+          this.setDrawer(val);
+        }
       },
-      set(val) {
-        this.setDrawer(val);
+      items() {
+        return this.$t("Layout.View.items");
+      },
+      auth() {
+        return this.$store.state.idToken;
       }
     },
-    items() {
-      return this.$t("Layout.View.items");
+    methods: {
+      ...mapMutations("app", ["setDrawer", "toggleDrawer"])
     },
-    auth() {
-      return this.$store.state.idToken;
+    beforeMount() {
+      return this.auth;
     }
-  },
-  methods: {
-    ...mapMutations("app", ["setDrawer", "toggleDrawer"])
-  },
-  beforeMount() {
-    return this.auth;
-  }
-};
+  };
 </script>
 
 <style lang="scss">
-#app-drawer {
-  .v-list__tile {
-    border-radius: 4px;
+  #app-drawer {
+    .v-list__tile {
+      border-radius: 4px;
 
-    &--buy {
-      margin-top: auto;
-      margin-bottom: 17px;
+      &--buy {
+        margin-top: auto;
+        margin-bottom: 17px;
+      }
     }
   }
-}
 </style>

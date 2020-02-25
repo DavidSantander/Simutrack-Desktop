@@ -62,7 +62,7 @@ export default {
       })
       .catch(error => console.log("TCL: signin -> error", error));
   },
-  tryAutoSignin({ commit }) {
+  tryAutoSignin({ commit }, signinRouter) {
     const token = localStorage.getItem("token");
     if (!token) {
       return;
@@ -77,6 +77,7 @@ export default {
       token: token,
       userId: userId
     });
+    signinRouter.push("/");
   },
   storeUser({ commit, state }, userData) {
     console.log("TCL: storeUser -> userData", userData);

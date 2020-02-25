@@ -6,9 +6,11 @@
   </v-app>
 </template>
 <script>
+import { mapMutations, mapState, mapActions } from "vuex";
 export default {
   created() {
-    this.$store.dispatch("tryAutoSignin");
+    console.log(this.router);
+    this.$store.dispatch("tryAutoSignin", this.$router);
   }
 };
 </script>

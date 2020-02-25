@@ -8,6 +8,7 @@
           dark
           icon
           @click.stop="onClickBtn"
+          color="#00adad"
         >
           <v-icon>mdi-view-list</v-icon>
         </v-btn>
@@ -141,7 +142,6 @@ export default {
       }
     },
     onLogout() {
-      console.log("Clicked Salir");
       this.$store.dispatch("logout");
     }
   }

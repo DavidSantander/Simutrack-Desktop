@@ -43,9 +43,11 @@ const router = new Router({
   }
 });
 
-// Authentication to.path !== ‘/login’
 router.beforeEach((to, from, next) => {
   if (!store.state.idToken && to.path !== "/signin") {
+    if (to.path == "/signup") {
+      next();
+    }
     next("/signin");
   } else {
     next();

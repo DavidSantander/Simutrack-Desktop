@@ -26,10 +26,10 @@
     margin-bottom: $card-offset !important;
 
     .category {
-      color: rgba($white, .62);
+      color: rgba($white, 0.62);
     }
 
-    .v-card--material__header.v-card{
+    .v-card--material__header.v-card {
       padding: $padding-general;
     }
   }
@@ -46,7 +46,7 @@
     margin: $card-margin 0 !important;
   }
 
-  .v-card--material__header{
+  .v-card--material__header {
     border-radius: $border-radius-base + 3;
     min-height: $card-chart-min-height;
     padding: 0 !important;
@@ -77,11 +77,11 @@
   margin: $card-margin 0 !important;
 }
 
-@include card-header-color('info', $brand-info, $cyan-400, $cyan-600);
-@include card-header-color('red', $brand-danger, $red-400, $red-600);
-@include card-header-color('green', $brand-success, $green-400, $green-600);
-@include card-header-color('orange', $brand-warning, $orange-400, $orange-600);
-@include card-header-color('purple', $brand-primary, $purple-400, $purple-600);
+@include card-header-color("info", $brand-info, $indigo-600, $cyan-600);
+@include card-header-color("red", $brand-danger, $red-400, $red-600);
+@include card-header-color("green", $brand-success, $green-400, $green-600);
+@include card-header-color("orange", $brand-warning, $orange-400, $orange-600);
+@include card-header-color("indigo", $brand-primary, $indigo-400, $indigo-600);
 
 .v-card--material-stats.v-card {
   .v-offset {

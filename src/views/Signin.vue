@@ -2,11 +2,7 @@
   <v-container fill-height fluid grid-list-xl>
     <v-layout justify-center wrap>
       <v-flex xs12 md8>
-        <material-card
-          color="info"
-          title="Registrate en Simutrack"
-          text="Completa tu perfil"
-        >
+        <material-card color="info" title="Accede a Simutrack">
           <v-form ref="form" v-model="valid" :lazy-validation="lazy">
             <v-container py-0>
               <v-layout wrap>
@@ -40,12 +36,12 @@
                 <!-- Register Button for Sign Up Form -->
                 <v-flex xs12 text-xs-right>
                   <v-btn
+                    color="info"
                     :disabled="!valid"
                     class="mx-0 font-weight-light"
-                    color="info"
                     @click="onSubmit()"
                   >
-                    Registrate!
+                    Acceder
                   </v-btn>
                 </v-flex>
               </v-layout>
@@ -84,7 +80,9 @@ export default {
       };
       this.$store.dispatch("signin", {
         email: formData.email,
-        password: formData.password
+        password: formData.password,
+        // Router to be redirected to the dashboard if is authenticated
+        router: this.$router
       });
     }
   }

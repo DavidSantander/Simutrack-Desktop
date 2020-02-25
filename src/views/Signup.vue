@@ -66,7 +66,7 @@
                     required
                   />
                 </v-flex>
-                <!-- School Input Field -->
+                <!-- Last Name Input Field -->
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="school"

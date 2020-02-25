@@ -6,12 +6,8 @@ export default {
   storeUser(state, user) {
     state.user = user;
   },
-  showDrawer(state) {
-    state.drawerVisible = true;
-  },
   clearAuthData(state) {
     state.idToken = null;
     state.userId = null;
-    drawerVisible: false;
   }
 };

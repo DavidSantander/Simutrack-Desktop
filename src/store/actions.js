@@ -1,7 +1,13 @@
 import axios from "./../plugins/axios-auth";
 import globalAxios from "axios";
+
 export default {
-  signup({ commit, dispatch }, authData) {
+  setLogoutTimer({ commit }, expirationTime) {
+    setTimeout(() => {
+      commit("clearAuthData");
+    }, expirationTime * 1000);
+  },
+  signup({ commit, dispatch, state }, authData) {
     // TODO Change Post request with the backend
     axios
       .post("/accounts:signUp?key=AIzaSyDJe-8SNbW0ky2z0xDs1lm2VZfIFfZFsGQ", {
@@ -15,12 +21,19 @@ export default {
           token: res.data.idToken,
           userId: res.data.localId
         });
+        const now = new Date();
+        const expirationDate = new Date(
+          now.getTime() + res.data.expiresIn * 1000
+        );
+        localStorage.setItem("token", res.data.idToken);
+        localStorage.setItem("userId", res.data.localId);
+        localStorage.setItem("expirationDate", expirationDate);
         dispatch("storeUser", authData);
-        commit("showDrawer");
+        dispatch("setLogoutTimer", res.data.expiresIn);
       })
       .catch(error => console.log(error));
   },
-  signin({ commit }, authData) {
+  signin({ commit, dispatch }, authData) {
     axios
       .post(
         "/accounts:signInWithPassword?key=AIzaSyDJe-8SNbW0ky2z0xDs1lm2VZfIFfZFsGQ",
@@ -32,15 +45,41 @@ export default {
       )
       .then(res => {
         console.log("TCL: signin -> res", res);
+        const now = new Date();
+        const expirationDate = new Date(
+          now.getTime() + res.data.expiresIn * 1000
+        );
+        localStorage.setItem("token", res.data.idToken);
+        localStorage.setItem("userId", res.data.localId);
+        localStorage.setItem("expirationDate", expirationDate);
         commit("authUser", {
           token: res.data.idToken,
           userId: res.data.localId
         });
-        commit("showDrawer");
+        // If Authenticated redirect to Dashboard
+        dispatch("setLogoutTimer", res.data.expiresIn);
+        authData.router.push("/");
       })
       .catch(error => console.log("TCL: signin -> error", error));
   },
+  tryAutoSignin({ commit }) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    const expirationDate = localStorage.getItem("expirationDate");
+    const now = new Date();
+    if (now >= expirationDate) {
+      return;
+    }
+    const userId = localStorage.getItem("userId");
+    commit("authUser", {
+      token: token,
+      userId: userId
+    });
+  },
   storeUser({ commit, state }, userData) {
+    console.log("TCL: storeUser -> userData", userData);
     if (!state.idToken) {
       return;
     }
@@ -64,13 +103,15 @@ export default {
           user.id = key;
           users.push(user);
         }
-        console.log(users);
         commit("storeUser", users[0]);
       })
       .catch(error => console.log(error));
   },
   logout({ commit, state }) {
-    console.log("In logout action");
     commit("clearAuthData");
+    localStorage.removeItem("expirationDate");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    router.replace("/signin");
   }
 };

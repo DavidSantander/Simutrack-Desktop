@@ -1,14 +1,7 @@
-/**
- * Vuex
- *
- * @library
- *
- * https://vuex.vuejs.org/en/
- */
-
 // Lib imports
 import Vue from "vue";
 import Vuex from "vuex";
+import Router from "vue-router";
 
 // Store functionality
 import actions from "./actions";

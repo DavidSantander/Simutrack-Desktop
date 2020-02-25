@@ -19,15 +19,15 @@
     <v-toolbar-items>
       <v-flex align-center layout py-2>
         <!-- Link to signup View -->
-        <router-link
-          v-if="!auth"
+        <!-- <router-link
+          v-if="auth"
           v-ripple="{ class: 'info--text' }"
           class="toolbar-items"
           to="/signup"
           color="purple"
         >
           Registrate
-        </router-link>
+        </router-link> -->
         <!-- Link to signin View -->
         <router-link
           v-if="!auth"

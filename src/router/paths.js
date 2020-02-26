@@ -31,8 +31,8 @@ export default [
     view: "TableList"
   },
   {
-    path: "/typography",
-    view: "Typography"
+    path: "/tasks",
+    view: "Tasks"
   },
   {
     path: "/icons",

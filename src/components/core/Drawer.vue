@@ -64,9 +64,9 @@
           text: "Dashboard"
         },
         {
-          to: "/typography",
+          to: "/tasks",
           icon: "mdi-format-font",
-          text: "Typography"
+          text: "Tareas"
         },
         {
           to: "/table-list",

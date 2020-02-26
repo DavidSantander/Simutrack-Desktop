@@ -1,7 +1,7 @@
 export default {
   drawer: null,
   color: "info",
-  image: "./../../../../health.jpg",
+  image: "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg",
   idToken: null,
   userId: null
 };

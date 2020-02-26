@@ -95,61 +95,73 @@
 </template>
 
 <script>
-import { mapMutations, mapState, mapActions } from "vuex";
-export default {
-  data: () => ({
-    notifications: [
-      "Mike, John responded to your email",
-      "You have 5 new tasks",
-      "You're now a friend with Andrew",
-      "Another Notification",
-      "Another One"
-    ],
-    title: null,
-    responsive: false
-  }),
-  computed: {
-    auth() {
-      return this.$store.getters.isAuthenticated;
-    }
-  },
-  watch: {
-    $route(val) {
-      this.title = val.name;
-    }
-  },
-  mounted() {
-    this.onResponsiveInverted();
-    window.addEventListener("resize", this.onResponsiveInverted);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onResponsiveInverted);
-  },
-  methods: {
-    ...mapActions(["logout"]),
-    ...mapMutations("app", ["setDrawer", "toggleDrawer"]),
-    onClickBtn() {
-      this.setDrawer(!this.$store.state.app.drawer);
-    },
-    onClick() {
-      //
-    },
-    onResponsiveInverted() {
-      if (window.innerWidth < 991) {
-        this.responsive = true;
-      } else {
-        this.responsive = false;
+  import { mapMutations, mapState, mapActions } from "vuex";
+  export default {
+    data: () => ({
+      notifications: [
+        "Mike, John responded to your email",
+        "You have 5 new tasks",
+        "You're now a friend with Andrew",
+        "Another Notification",
+        "Another One"
+      ],
+      title: null,
+      responsive: false
+    }),
+    computed: {
+      auth() {
+        return this.$store.getters.isAuthenticated;
       }
     },
-    onLogout() {
-      this.$store.dispatch("logout");
+    watch: {
+      $route(val) {
+        console.log("TCL: $route -> val", val.name);
+        console.log("TCL: $route -> val.name", typeof val.name);
+        switch (val.name) {
+          case "Dashboard":
+            this.title = "Dashboard";
+            break;
+          case "Tasks":
+            this.title = "Tareas";
+            break;
+          default:
+            this.title = "Por asignar";
+        }
+        // this.title = val.name;
+      }
+    },
+    mounted() {
+      this.onResponsiveInverted();
+      window.addEventListener("resize", this.onResponsiveInverted);
+    },
+    beforeDestroy() {
+      window.removeEventListener("resize", this.onResponsiveInverted);
+    },
+    methods: {
+      ...mapActions(["logout"]),
+      ...mapMutations("app", ["setDrawer", "toggleDrawer"]),
+      onClickBtn() {
+        this.setDrawer(!this.$store.state.app.drawer);
+      },
+      onClick() {
+        //
+      },
+      onResponsiveInverted() {
+        if (window.innerWidth < 991) {
+          this.responsive = true;
+        } else {
+          this.responsive = false;
+        }
+      },
+      onLogout() {
+        this.$store.dispatch("logout");
+      }
     }
-  }
-};
+  };
 </script>
 
 <style>
-#core-toolbar a {
-  text-decoration: none;
-}
+  #core-toolbar a {
+    text-decoration: none;
+  }
 </style>

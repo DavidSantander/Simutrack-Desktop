@@ -42,13 +42,14 @@
                 class="mx-0 font-weight-light"
                 color="info"
                 target="_blank"
-                @click="startTracking()"
+                @click="openImage()"
               >
                 <v-icon left>mdi-play-circle</v-icon>
                 <span>Iniciar tarea</span>
               </v-btn>
             </v-flex>
           </v-layout>
+          <canvas></canvas>
         </material-card>
       </v-flex>
     </v-layout>
@@ -56,7 +57,8 @@
 </template>
 
 <script>
-  import { PythonShell } from "python-shell";
+  const { cv } = require("../opencv/utils");
+  const { runVideoFaceDetection } = require("../opencv/faceDetect/commons");
   export default {
     data: () => ({
       headers: [
@@ -88,16 +90,30 @@
       ]
     }),
     methods: {
-      startTracking() {
-        console.log("Started tracking...");
-        let options = {
-          pythonOptions: ["-u"], // get print results in real-time
-          scriptPath: "src/python_engine"
-        };
-        console.log("TCL: startTracking -> options", options);
-        PythonShell.run("PythonApplication1.py", options, function(err) {
-          if (err) throw err;
-        });
+      async openImage() {
+        await this.openWebcam();
+      },
+      async openWebcam() {
+        const classifier = new cv.CascadeClassifier(cv.HAAR_FRONTALFACE_ALT2);
+
+        const webcamPort = 0;
+
+        function detectFaces(img) {
+          // restrict minSize and scaleFactor for faster processing
+          const options = {
+            minSize: new cv.Size(100, 100),
+            scaleFactor: 1.2,
+            minNeighbors: 10
+          };
+          return classifier.detectMultiScale(img.bgrToGray(), options).objects;
+        }
+        runVideoFaceDetection(webcamPort, detectFaces);
+        // const devicePort = 0;
+        // const camera = new cv.VideoCapture(devicePort);
+        // while (true) {
+        //   let frame = camera.read();
+        //   cv.imshow("Image", frame);
+        // }
       }
     }
   };

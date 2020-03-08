@@ -42,13 +42,14 @@
                 class="mx-0 font-weight-light"
                 color="info"
                 target="_blank"
-                @click="startTracking()"
+                @click="openImage()"
               >
                 <v-icon left>mdi-play-circle</v-icon>
                 <span>Iniciar tarea</span>
               </v-btn>
             </v-flex>
           </v-layout>
+          <canvas></canvas>
         </material-card>
       </v-flex>
     </v-layout>
@@ -56,40 +57,51 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    headers: [
-      {
-        sortable: false,
-        text: "Escoge una tarea a realizar",
-        value: "name"
+  const cv = require("opencv4nodejs");
+  const path = require("path");
+  export default {
+    data: () => ({
+      headers: [
+        {
+          sortable: false,
+          text: "Escoge una tarea a realizar",
+          value: "name"
+        }
+      ],
+      items: [
+        {
+          name: "Dakota Rice"
+        },
+        {
+          name: "Minerva Hooper"
+        },
+        {
+          name: "Sage Rodriguez"
+        },
+        {
+          name: "Philip Chanley"
+        },
+        {
+          name: "Doris Greene"
+        },
+        {
+          name: "Mason Porter"
+        }
+      ]
+    }),
+    methods: {
+      async openImage() {
+        await this.openWebcam();
+      },
+      async openWebcam() {
+        const devicePort = 0;
+        const camera = new cv.VideoCapture(devicePort);
+        camera.readAsync((err, frame) => {
+          cv.imshowWait("Image", frame);
+        });
       }
-    ],
-    items: [
-      {
-        name: "Dakota Rice"
-      },
-      {
-        name: "Minerva Hooper"
-      },
-      {
-        name: "Sage Rodriguez"
-      },
-      {
-        name: "Philip Chanley"
-      },
-      {
-        name: "Doris Greene"
-      },
-      {
-        name: "Mason Porter"
-      }
-    ]
-  }),
-  methods: {
-    startTracking() {}
-  }
-};
+    }
+  };
 </script>
 
 <style lang="scss"></style>

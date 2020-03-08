@@ -56,51 +56,40 @@
 </template>
 
 <script>
-  import { PythonShell } from "python-shell";
-  export default {
-    data: () => ({
-      headers: [
-        {
-          sortable: false,
-          text: "Escoge una tarea a realizar",
-          value: "name"
-        }
-      ],
-      items: [
-        {
-          name: "Dakota Rice"
-        },
-        {
-          name: "Minerva Hooper"
-        },
-        {
-          name: "Sage Rodriguez"
-        },
-        {
-          name: "Philip Chanley"
-        },
-        {
-          name: "Doris Greene"
-        },
-        {
-          name: "Mason Porter"
-        }
-      ]
-    }),
-    methods: {
-      startTracking() {
-        console.log("Started tracking...");
-        let options = {
-          pythonOptions: ["-u"], // get print results in real-time
-          scriptPath: "src/python_engine"
-        };
-        console.log("TCL: startTracking -> options", options);
-        PythonShell.run("PythonApplication1.py", options, function(err) {
-          if (err) throw err;
-        });
+export default {
+  data: () => ({
+    headers: [
+      {
+        sortable: false,
+        text: "Escoge una tarea a realizar",
+        value: "name"
       }
-    }
-  };
+    ],
+    items: [
+      {
+        name: "Dakota Rice"
+      },
+      {
+        name: "Minerva Hooper"
+      },
+      {
+        name: "Sage Rodriguez"
+      },
+      {
+        name: "Philip Chanley"
+      },
+      {
+        name: "Doris Greene"
+      },
+      {
+        name: "Mason Porter"
+      }
+    ]
+  }),
+  methods: {
+    startTracking() {}
+  }
+};
 </script>
 
 <style lang="scss"></style>

@@ -42,6 +42,7 @@
                 class="mx-0 font-weight-light"
                 color="info"
                 target="_blank"
+                @click="startTracking()"
               >
                 <v-icon left>mdi-play-circle</v-icon>
                 <span>Iniciar tarea</span>
@@ -55,6 +56,7 @@
 </template>
 
 <script>
+  import { PythonShell } from "python-shell";
   export default {
     data: () => ({
       headers: [
@@ -84,7 +86,20 @@
           name: "Mason Porter"
         }
       ]
-    })
+    }),
+    methods: {
+      startTracking() {
+        console.log("Started tracking...");
+        let options = {
+          pythonOptions: ["-u"], // get print results in real-time
+          scriptPath: "src/python_engine"
+        };
+        console.log("TCL: startTracking -> options", options);
+        PythonShell.run("PythonApplication1.py", options, function(err) {
+          if (err) throw err;
+        });
+      }
+    }
   };
 </script>
 

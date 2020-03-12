@@ -59,6 +59,7 @@
 <script>
   const { cv } = require("../opencv/utils");
   const { runVideoFaceDetection } = require("../opencv/faceDetect/commons");
+
   export default {
     data: () => ({
       headers: [
@@ -93,11 +94,10 @@
       async openImage() {
         await this.openWebcam();
       },
+
       async openWebcam() {
         const classifier = new cv.CascadeClassifier(cv.HAAR_FRONTALFACE_ALT2);
-
         const webcamPort = 0;
-
         function detectFaces(img) {
           // restrict minSize and scaleFactor for faster processing
           const options = {
@@ -108,12 +108,6 @@
           return classifier.detectMultiScale(img.bgrToGray(), options).objects;
         }
         runVideoFaceDetection(webcamPort, detectFaces);
-        // const devicePort = 0;
-        // const camera = new cv.VideoCapture(devicePort);
-        // while (true) {
-        //   let frame = camera.read();
-        //   cv.imshow("Image", frame);
-        // }
       }
     }
   };

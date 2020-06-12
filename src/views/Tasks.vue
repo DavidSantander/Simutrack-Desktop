@@ -9,7 +9,12 @@
         >
           <v-layout>
             <!-- List of Tasks -->
-            <v-flex lg2 md4>
+            <v-tabs>
+              <v-tab>Item One</v-tab>
+              <v-tab>Item Two</v-tab>
+              <v-tab>Item Three</v-tab>
+            </v-tabs>
+            <!-- <v-flex lg2 md4>
               <v-card>
                 <v-data-table
                   :headers="headers"
@@ -31,7 +36,7 @@
                   </template>
                 </v-data-table>
               </v-card>
-            </v-flex>
+            </v-flex> -->
           </v-layout>
           <!-- Start Task Button -->
           <v-layout>
